@@ -1,0 +1,57 @@
+button {
+    background-color: rgb(20, 20, 20);
+    opacity: 0.9;
+    border: none;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    width: 60px;
+    height: 60px;
+    border: none;
+}
+.result {
+    width: 124px;
+}
+.clear{
+    width: 124px;
+}
+button:hover {
+    background-color: #606060;
+}
+table {
+    position: relative;
+    margin: 5px auto;
+    bottom: 25px;
+    padding: 5px auto;
+}
+
+.container {
+    margin: 0 auto;
+    padding: 100px 0;
+    display: block;
+    background-color: rgb(34, 33, 36);
+    width: 300px;
+    height: 300px;
+    border-radius: 5px;
+}
+
+.tela-container {
+    text-align: center;
+    position: relative;
+    top: -60px;
+}
+
+.tela {
+    display: inline-block;
+    margin: 0 auto;
+    background-color: rgb(41, 39, 43);
+    width: 90%;
+    height: 70px;
+    color: #ffff;
+    font-size: 20px;
+    text-align: end;
+    line-height: 4;
+    padding: 0 10px;
+}

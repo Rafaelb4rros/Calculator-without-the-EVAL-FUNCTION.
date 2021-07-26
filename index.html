@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+    <head>
+        <title>Calculator</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/style.css">
+    </head>
+    <body>
+        <main>
+            <div class="container">
+                <table>
+                    <div class="tela-container">
+                        <input class="tela"></input>
+                    </div>
+                    <tr>
+                        <th colspan="2"><button type="button" class="clear" data-type="cleanAll">CE</button></th>
+                        <th><button type="button" class="button" data-type="cleanLast">[x]</button></th>
+                        <td><button type="button" class="operator" onclick="insert('÷')" data-type="buttonDivide">÷</button></td>
+                    </tr>
+                    <tr>
+                        <td><button type="button" class="button" onclick="insert(7)" data-type="buttonS">7</button></td>
+                        <td><button type="button" class="button" onclick="insert(8)" data-type="buttonE">8</button></td>
+                        <td><button type="button" class="button" onclick="insert(9)" data-type="buttonN">9</button></td>
+                        <td><button type="button" class="operator" onclick="insert('x')" data-type="buttonX">x</button></td>
+                    </tr>
+                    <tr>
+                        <td><button type="button" class="button" onclick="insert(4)" data-type="buttonFo">4</button></td>
+                        <td><button type="button" class="button" onclick="insert(5)" data-type="buttonFi">5</button></td>
+                        <td><button type="button" class="button" onclick="insert(6)" data-type="ButtonS">6</button></td>
+                        <td><button type="button" class="operator" onclick="insert('-')" data-type="buttonMinus">-</button></td>
+                    </tr>
+                    <tr>
+                        <td><button type="button" class="button" onclick="insert(1)" data-type="buttonO">1</button></td>
+                        <td><button type="button" class="button" onclick="insert(2)" data-type="buttonTw">2</button></td>
+                        <td><button type="button" class="button" onclick="insert(3)" data-type="ButtonTr">3</button></td>
+                        <td><button type="button" class="operator" onclick="insert('+')" data-type="buttonSUM">+</button></td>
+                    </tr>
+                    <tr>
+                        <td colspan="1"></td>
+                        <td><button type="button" class="button" onclick="insert(0)" data-type="buttonZ">0</button></td>
+                        <td colspan="2"><button type="button" class="result" data-type="result">=</button></td>
+                    </tr>
+                </table>
+            </div>
+        </main>
+        <script src="/js/main.js"></script>
+    </body>
+</html>
