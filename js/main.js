@@ -1,144 +1,158 @@
+
 const tela = document.querySelector(".tela");
-const buttonsEq = document.querySelectorAll("button");
 const result = document.querySelector('[data-type="result"]');
+const clearRow = document.querySelector('[data-type="cleanRow"]');
+const clearAll = document.querySelector('[data-type="cleanAll"]')
 const clearLast = document.querySelector('[data-type="cleanLast"]');
-tela.value = 0;
-
-OPSUM = false;
-OPSUB = false;
-OPMUL = false;
-OPDIV = false;
-
+const mem  = document.querySelector('.opShow');
+let op = "";
+let resultOp = "";
+const operations = ["+","÷","x","-"];
+let y = 0;
 
 function insert(number) {
-if(tela.value == 0) {
-    tela.value = "";
-}
-    tela.value += number;
-    buttonsEq.forEach(button =>{
-        button.addEventListener('click', (evt) => {
-            validaOperacao(evt.target);
-        })
-    })
-    var test = tela.value;
-    if(test.charAt(0) === '+'
-        ||test.charAt(0) === '-'
-        ||test.charAt(0) === 'x'
-        ||test.charAt(0) === '÷') {
 
-        tela.value = 0;
-    }
-    
-    for(var i = 0; i < test.length; i++) {
-        if(test.charAt(i) === '+') {
-          if(test.charAt(i +1) === '+') {
-             
-          }
+let numbers = tela.value;
+tela.value += number;
+
+clearLast.onclick = () =>{
+    if(tela.value !== "" && tela.value !== 0 && op === "") {
+        tela.value = tela.value.substr(0, tela.value.length -1)
+} else {
+        clearLast.disabled = true;
+}
+    if(tela.value !== "" && mem.textContent !== "") {
+        tela.value = tela.value.substr(0, tela.value.length -1)
+} else {
+         clearLast.disabled = true;
+}
+}
+    clearRow.onclick = () => {
+        if(tela.value !== "" || tela.value !== 0 && mem.textContent !== 0 || mem.textContent !== "") {
+                    tela.value = "";
+                } else {
+                    clearRow.disabled = true;
+                } 
+                if(tela.value !== "" || tela.value !== 0 || mem.textContent === "" || mem.textContent === 0) {
+                    tela.value = "";
+                } else {
+                    clearRow.disabled = true;
+                }
+            }
+            clearAll.onclick = () =>{
+                op = "";
+                tela.value = "";
+                mem.textContent = "";
+                document.querySelector('[data-type="buttonSUM"]').disabled = false;
+                document.querySelector('[data-type="buttonMinus"]').disabled = false;
+                document.querySelector('[data-type="buttonX"]').disabled = false;
+                document.querySelector('[data-type="buttonDivide"]').disabled = false;
+            }
+
+    if(tela.value.charAt(0) !== "+" &&
+        tela.value.charAt(0) !== "-"&&
+        tela.value.charAt(0) !== "x" &&
+        tela.value.charAt(0) !== "÷") {
+            
+        if(operations.includes(tela.value.charAt(numbers.length))) {
+            document.querySelector('[data-type="buttonSUM"]').disabled = true;
+            document.querySelector('[data-type="buttonMinus"]').disabled = true;
+            document.querySelector('[data-type="buttonX"]').disabled = true;
+            document.querySelector('[data-type="buttonDivide"]').disabled = true;
+            mem.textContent = tela.value;
+
+                operation(tela.value.charAt(numbers.length))
+
+                if(tela.value.substr(0, mem.textContent.length) === mem.textContent){
+                    tela.value = tela.value.substr(mem.textContent, tela.value);
+                }
+            }
+
+        } else { 
+            tela.value = "";
+        }
+
+        if(op !== "" && tela.value !== "" && mem.textContent !== ""){
+            let numb = mem.textContent + tela.value;
+            result.onclick = () => operationDefined(numb.split(op));
         }
     }
+
+    function operation(opr) {
+        if(opr === '+') { return op = '+'}
+        if(opr === '-') { return op = '-'}
+        if(opr === '÷') { return op = '÷'}
+        if(opr === 'x') { return op = 'x'}
+    }
+
+    const operationDefined = (numbers) =>{
+        n1 = parseFloat(numbers[0]);
+        n2 = parseFloat(numbers[1]);
+
+       if(op === "+") {
+            resultOp = n1 + n2;
+       }
+       if(op === "-") {
+            resultOp = n1 - n2;
+       }
+       if( op === "÷" ) {
+           resultOp = n1 / n2;
+       }
+       if( op === "x") {
+           resultOp = n1 * n2;
+       }
+       if(resultOp !== "") {
+        clearLast.onclick = () =>{
+            mem.textContent = "";
+        } 
+        clearRow.onclick = () =>{
+            if(tela.value !== "" || tela.value !== 0 || mem.textContent !== "" || mem.textContent !== 0) {
+                tela.value = "";
+                mem.textContent = "";
+            } 
+        }
+
+       }
     
-    clearLast.addEventListener('click', clearLAst)
-}
-    function clearLAst() {
-       let test = tela.value;
+       mem.textContent = ` ${mem.textContent.substr(0, mem.textContent.length -1)} ${op} ${n2} =`
+       
+       if(mem.textContent.length >= 3) {
 
-       tela.value = test.substring(0, test.length - 1)
+           result.onclick =  evalopMem;
+        }
+       
+       document.querySelector('[data-type="buttonSUM"]').disabled = false;
+       document.querySelector('[data-type="buttonMinus"]').disabled = false;
+       document.querySelector('[data-type="buttonX"]').disabled = false;
+       document.querySelector('[data-type="buttonDivide"]').disabled = false;
+
+       return tela.value = resultOp;
     }
 
-function validaOperacao(button) {
-    const operacaoTipo = button.dataset.type;
 
-    if(operators[operacaoTipo]) {
-        operators[operacaoTipo](button);
+    function evalopMem() {
+        if(tela.value !== "" && mem.value !== "" && resultOp !== "") {
+        let th = mem.textContent
+        let thr = th.replace("=", "");
+        let thrs = thr.split(op)
+        n1n = parseFloat(thrs[0]);
+        n2n = parseFloat(thrs[1]);
+
+        mem.textContent = `${parseInt(tela.value)} ${op} ${parseInt(n2n)} =`
+   
+        if(op === "+") {
+            resultOp = n1n + n2n
+       }
+       if(op === "-") {
+            resultOp = n1n - n2n;
+       }
+       if( op === "÷" ) {
+           resultOp = n1n / n2n;
+       }
+       if( op === "x") {
+           resultOp = n1n * n2n;
+       }
+    
+       tela.value = resultOp;
     }
-}
-
-const operators = {
-    buttonMinus:button => subtracao(button),
-    buttonSUM:button => soma(button),
-    buttonX:button => multiplicacao(button),
-    buttonDivide:button => divisao(button),
-
-    cleanAll:button => clearALL(button),
-}
-
-result.addEventListener('click', ()=>{
-    var telaStr = document.querySelector('.tela').value;
-    var exp = new String(telaStr);
-
-    if(OPSUM) { 
-        var numbers = new String(exp.split('+'))
-
-        n1 = numbers.substring(0, numbers.indexOf(','));
-        n2 = numbers.substring(numbers.indexOf(',') +1, numbers.length);
-
-        var resultadoFinal = parseInt(n1) + parseInt(n2);
-
-        tela.value =+ resultadoFinal;
-      
-        return OPSUM = false;
-
-    } else if(OPSUB == true && OPSUM == false) {
-
-        var numbers = new String(exp.split('-'))
-
-        n1 = numbers.substring(0, numbers.indexOf(','));
-        n2 = numbers.substring(numbers.indexOf(',') +1, numbers.length);
-
-        var resultadoFinal = parseInt(n1) - parseInt(n2);
-
-        tela.value =+ resultadoFinal;
-      
-        return OPSUB = false;
-
-    } else if(OPMUL == true && OPSUB == false) {
-        var numbers = new String(exp.split('x'))
-
-        n1 = numbers.substring(0, numbers.indexOf(','));
-        n2 = numbers.substring(numbers.indexOf(',') +1, numbers.length);
-
-        var resultadoFinal = parseInt(n1) * parseInt(n2);
-
-        tela.value =+ resultadoFinal;
-      
-        return OPMUL = false;
-    } else if (OPDIV == true && OPMUL == false) {
-
-        var numbers = new String(exp.split('÷'))
-
-        n1 = numbers.substring(0, numbers.indexOf(','));
-        n2 = numbers.substring(numbers.indexOf(',') +1, numbers.length);
-
-        var resultadoFinal = parseInt(n1) / parseInt(n2);
-
-        tela.value =+ resultadoFinal;
-      
-        return OPDIV = false;
-    }
-    })
-
-function soma() {
-
-    return OPSUM = true;
-
-}
-
-function subtracao() {
-
-    return OPSUB = true;
-}
-
-function multiplicacao() {
-
-    return OPMUL = true;
-}
-function divisao() {
-
-    return OPDIV = true;
-}
-
-function clearALL() {
-    tela.value = 0;
-    n1 = 0;
-    n2 = 0;
 }

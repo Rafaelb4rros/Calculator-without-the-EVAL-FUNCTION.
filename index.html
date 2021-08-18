@@ -11,11 +11,13 @@
             <div class="container">
                 <table>
                     <div class="tela-container">
+                        <span class="opShow"></span>
                         <input class="tela"></input>
                     </div>
                     <tr>
-                        <th colspan="2"><button type="button" class="clear" data-type="cleanAll">CE</button></th>
-                        <th><button type="button" class="button" data-type="cleanLast">[x]</button></th>
+                        <th colspan="1"><button type="button" class="clear" data-type="cleanAll">C</button></th>
+                        <th><button type="button" class="clear" data-type="cleanLast">[x]</button></th>
+                        <th colspan="1"><button type="button" class="clear" data-type="cleanRow">CE</button></th>
                         <td><button type="button" class="operator" onclick="insert('÷')" data-type="buttonDivide">÷</button></td>
                     </tr>
                     <tr>
@@ -34,10 +36,10 @@
                         <td><button type="button" class="button" onclick="insert(1)" data-type="buttonO">1</button></td>
                         <td><button type="button" class="button" onclick="insert(2)" data-type="buttonTw">2</button></td>
                         <td><button type="button" class="button" onclick="insert(3)" data-type="ButtonTr">3</button></td>
-                        <td><button type="button" class="operator" onclick="insert('+')" data-type="buttonSUM">+</button></td>
+                        <td><button type="button" onclick="insert('+')" data-type="buttonSUM">+</button></td>
                     </tr>
                     <tr>
-                        <td colspan="1"></td>
+                        <td><button type="button" class="button" onclick="insert('.')" data-type="buttonZ">,</button></td>
                         <td><button type="button" class="button" onclick="insert(0)" data-type="buttonZ">0</button></td>
                         <td colspan="2"><button type="button" class="result" data-type="result">=</button></td>
                     </tr>

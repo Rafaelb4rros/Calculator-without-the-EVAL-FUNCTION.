@@ -15,7 +15,7 @@ button {
     width: 124px;
 }
 .clear{
-    width: 124px;
+    width: 62px;
 }
 button:hover {
     background-color: #606060;
@@ -54,4 +54,14 @@ table {
     text-align: end;
     line-height: 4;
     padding: 0 10px;
+}
+.opShow{
+    position: absolute;
+    text-align: right;
+    width: 90%;
+    height: 20px;
+    z-index: 4;
+    font-size: 20px;
+    font-weight: bold;
+    color: #606060;
 }
