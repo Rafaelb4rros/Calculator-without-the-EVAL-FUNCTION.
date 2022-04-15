@@ -27,7 +27,7 @@ table {
     padding: 5px auto;
 }
 
-.container {
+.calculator {
     margin: 0 auto;
     padding: 100px 0;
     display: block;
@@ -55,7 +55,7 @@ table {
     line-height: 4;
     padding: 0 10px;
 }
-.opShow{
+.current-operation{
     position: absolute;
     text-align: right;
     width: 90%;
